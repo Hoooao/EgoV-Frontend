@@ -12,15 +12,13 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
-import axios from 'axios'
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="http://localhost:3000/#">
-        Ego Varsity
+      <Link color="inherit" href="https://mui.com/">
+        Your Website
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -28,12 +26,9 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme({
-  palette:{
-    primary: purple
-  }
-})
-export default function SignInSide() {
+const theme = createTheme();
+
+export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,6 +39,7 @@ export default function SignInSide() {
   };
 
   return (
+    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -126,5 +122,6 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
+    </ThemeProvider>
   );
 }

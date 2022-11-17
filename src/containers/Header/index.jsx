@@ -15,7 +15,6 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import axios from 'axios';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,15 +56,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+
   };
 
   const handleMobileMenuClose = () => {
@@ -80,22 +79,6 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
-  const [searchQuery,setSearchQuery]=React.useState('');
-
-  const handleSearch=(key)=>{
-    if(key==='Enter'){
-        axios.get(`/api/search?content=${searchQuery}`).then(data=>{
-            if(data.data.ok==0){
-                alert("There is no result")
-            }
-            else {
-                console.log(data.data.results)
-                alert(data.data.results)
-            }
-        })
-    }
-  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -175,22 +158,13 @@ export default function PrimarySearchAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            EgoVar
+            Ego Varsity
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -199,15 +173,6 @@ export default function PrimarySearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              onChange={(e)=>{
-                setSearchQuery(e.target.value);
-              }
-            }
-            onKeyDown={
-                (e)=>{
-                    handleSearch(e.key)
-                }
-              }
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import MainRouter from './MainRouter';
-import SignInSide from './containers/SignInSide'
 import { createTheme, ThemeProvider } from '@mui/material';
 import { purple } from '@mui/material/colors';
 const theme = createTheme({

@@ -1,15 +1,29 @@
+import { makeStyles } from '@mui/styles'
 import React from 'react'
-import Header from '../Header'
+import ResponsiveAppBar from '../ResponsiveAppBar'
 import LeftDrawer from '../LeftDrawer'
+import { Container,Box } from '@mui/material'
 
+const useStyle = makeStyles({
+    container: {
+        backgroundColor: ''
+    },
+    content:{
+        position:'relative',
+        top:'20px'
+    }
+});
 export default function Layout({ children }) {
+    const classes = useStyle();
     return (
-        <Header>
-            <LeftDrawer/>
-            <div>
-                {children}
-            </div>
-        </Header>
+        <div>
+            <ResponsiveAppBar />
+            <Container className={classes.container} maxWidth='95%'>
+                <Box className={classes.content}>
+                    {children}
+                </Box>
+            </Container>
+        </div>
     )
 }
 

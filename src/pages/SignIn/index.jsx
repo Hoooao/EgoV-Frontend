@@ -12,13 +12,19 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import p1 from '../../img/signin/p1.jpg'
+import p2 from '../../img/signin/p2.jpg'
+import p3 from '../../img/signin/p3.jpg'
+import p4 from '../../img/signin/p4.jpg'
+import p5 from '../../img/signin/p5.jpg'
+import p6 from '../../img/signin/p6.jpg'
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://google.com/">
+        Ego Varsity
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -27,6 +33,7 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
+
 
 export default function SignIn() {
   const handleSubmit = (event) => {
@@ -37,6 +44,7 @@ export default function SignIn() {
       password: data.get('password'),
     });
   };
+  const pics = [p1,p2,p3,p4,p5,p6];
 
   return (
     <ThemeProvider theme={theme}>
@@ -48,7 +56,7 @@ export default function SignIn() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage: `url(${pics[Math.floor(Math.random() * 5)]})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

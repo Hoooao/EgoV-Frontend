@@ -1,12 +1,11 @@
 import React from 'react'
-import { Typography, Box, Card, Paper, Button, ButtonGroup } from '@mui/material'
+import { Typography, Box, Button, ButtonGroup, Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles';
-import index_banner from '../../img/index_banner.jpg';
-import SubCard from '../../containers/SubCard';
+import index_banner from '../../img/index/index_banner.jpg';
+import SubCardGrid from '../../containers/SubCardGrid';
 const useStyle = makeStyles({
   banner: {
     height: 400,
-
     background: `url(${index_banner}) 10%`,
     backgroundSize: 'cover'
   }
@@ -39,10 +38,15 @@ export default function Index() {
         </ButtonGroup>
       </Box>
 
-      <Box>
-        <SubCard/>
-        <SubCard/>
-        <SubCard/>
+      <Box sx={{
+        paddingTop:'100px'
+      }}>
+        <Grid container>
+        <SubCardGrid/>
+        <SubCardGrid/>
+        <SubCardGrid/>
+        <SubCardGrid/>
+        </Grid>
       </Box>
 
     </div>

@@ -1,8 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';  
+import SubCardGrid from '../../containers/SubCardGrid';
 import { Typography, Box, Button, ButtonGroup, Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import index_banner from '../../img/index/index_banner.jpg';
-import SubCardGrid from '../../containers/SubCardGrid';
 const useStyle = makeStyles({
   banner: {
     height: 400,
@@ -15,6 +16,7 @@ const useStyle = makeStyles({
 
 export default function Index() {
   const classes = useStyle();
+  const navigate = useNavigate();
   const subjects = ['Machine Learning', 'Operating Systems', 'Computer Vision', 'Computer Networking',
     'Database Management System', 'Distributed Systems'];
   return (
@@ -32,16 +34,17 @@ export default function Index() {
 
 
         <ButtonGroup size='large' sx={{ outlineWidth: '12px' }}>
-          //按钮的颜色！！！！！
-          <Button variant="outlined" ><Typography>Log In</Typography></Button>
-          <Button variant="outlined"><Typography>Sign Up</Typography></Button>
+          <Button variant="bold" onClick ={()=> navigate('/login')} sx={{
+            fontSize:24
+          }}><Typography>Log In</Typography></Button>
+          <Button variant="bold" onClick = {()=> navigate('/signup')}><Typography>Sign Up</Typography></Button>
         </ButtonGroup>
       </Box>
 
       <Box sx={{
         paddingTop:'100px'
       }}>
-        <Grid container>
+        <Grid container spacing={7}>
         <SubCardGrid/>
         <SubCardGrid/>
         <SubCardGrid/>

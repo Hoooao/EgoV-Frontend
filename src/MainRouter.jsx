@@ -6,7 +6,6 @@ import SignUp from './pages/SignUp'
 import Layout from './containers/Layout'
 import Course from './pages/Course'
 
-
 const MainRouter = () => {
     return (
         <div>

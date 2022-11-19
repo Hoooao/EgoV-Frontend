@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useMemo, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -36,6 +36,8 @@ const theme = createTheme();
 
 
 export default function LogIn() {
+  const [usernameMail, setUsernameMail] = useState('');
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -78,7 +80,7 @@ export default function LogIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Log in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -89,6 +91,7 @@ export default function LogIn() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={usernameMail}
                 autoFocus
               />
               <TextField

@@ -9,7 +9,7 @@ import { Grid } from '@mui/material';
 
 export default function SubCard() {
   return ( 
-    <Grid item xs={4} sx={{
+    <Grid item xs={12} md= {6} lg={4} sx={{
       paddingTop:'20px'
     }}>
       <Card sx={{ maxWidth: 345 }}>

@@ -15,6 +15,7 @@ const MainRouter = () => {
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/course" element={<Course />} />
+                    <Route path='*' element={<Index />}/>
                 </Routes>
             </Layout>
         </div>

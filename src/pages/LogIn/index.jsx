@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -18,6 +20,7 @@ import p3 from '../../img/signin/p3.jpg'
 import p4 from '../../img/signin/p4.jpg'
 import p5 from '../../img/signin/p5.jpg'
 import p6 from '../../img/signin/p6.jpg'
+import apiConfig from '../../apiConfig.mjs';
 
 function Copyright(props) {
   return (
@@ -36,17 +39,30 @@ const theme = createTheme();
 
 
 export default function LogIn() {
+  const navigate = useNavigate();
   const [usernameMail, setUsernameMail] = useState('');
+  const [password, setPassword] = useState('');
+  const [picNum, setPicNum] = useState(Math.floor(Math.random() * 5));
+
+  const pics = [p1, p2, p3, p4, p5, p6];
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    axios({
+      method: "POST",
+      url: `${apiConfig.base}/api/user/login`,
+      data: {
+        username_mail: usernameMail,
+        password
+      }
+    }).then(res=>{
+      if(res.data.ok){
+        navigate("/");
+      }else {
+        console.log(res.data.message)
+      }
+    })
   };
-  const pics = [p1,p2,p3,p4,p5,p6];
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,7 +74,7 @@ export default function LogIn() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${pics[Math.floor(Math.random() * 5)]})`,
+            backgroundImage: `url(${pics[picNum]})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
@@ -88,11 +104,12 @@ export default function LogIn() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Enter you email or username"
                 name="email"
                 autoComplete="email"
                 value={usernameMail}
                 autoFocus
+                onChange={e => setUsernameMail(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -102,7 +119,9 @@ export default function LogIn() {
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
                 autoComplete="current-password"
+                onChange={e => setPassword(e.target.value)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -114,7 +133,7 @@ export default function LogIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Login
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -123,7 +142,7 @@ export default function LogIn() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/signup" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

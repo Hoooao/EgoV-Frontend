@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme => ({
 const Form = () => {
   const navigate = useNavigate();
   const handleClose = () => { navigate('/') };
+  const [picNum, setPicNum] = useState(Math.floor(Math.random() * 5));
 
   const pics = [p1, p2, p3, p4, p5, p6];
   const classes = useStyles();
@@ -47,24 +48,23 @@ const Form = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if(password===repassword){
+    if (password === repassword) {
       axios({
         method: "POST",
         url: `${baseURL}/api/user/signup`,
-        data:{
-          username:userName,
+        data: {
+          username: userName,
           email,
           password,
         }
-      }).then(res=>{
-        if(res.data.ok) handleClose();
+      }).then(res => {
+        if (res.data.ok) handleClose();
         else console.log(res.data.message)
       })
-    }else{
+    } else {
       console.log("Password missmatch")
     }
   };
-  const [picNum, setPicNum] = useState(Math.floor(Math.random() * 5));
   return (
     <Box sx={{
       background: `url(${pics[picNum]}) 100%`,

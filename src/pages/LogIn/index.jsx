@@ -21,7 +21,10 @@ import p4 from '../../img/signin/p4.jpg'
 import p5 from '../../img/signin/p5.jpg'
 import p6 from '../../img/signin/p6.jpg'
 import apiConfig from '../../apiConfig.mjs';
-
+import {useDispatch} from 'react-redux';
+import {setUser} from '../../redux/userSlice.mjs';
+import Axios  from 'axios';
+Axios.defaults.withCredentials=true
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -43,6 +46,8 @@ export default function LogIn() {
   const [usernameMail, setUsernameMail] = useState('');
   const [password, setPassword] = useState('');
   const [picNum, setPicNum] = useState(Math.floor(Math.random() * 5));
+  const dispatch = useDispatch();
+
 
   const pics = [p1, p2, p3, p4, p5, p6];
 
@@ -57,6 +62,7 @@ export default function LogIn() {
       }
     }).then(res=>{
       if(res.data.ok){
+        dispatch(setUser(res.data.userObj));
         navigate("/");
       }else {
         console.log(res.data.message)

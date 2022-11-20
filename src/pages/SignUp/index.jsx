@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 
 const Form = () => {
   const navigate = useNavigate();
-  const handleClose = () => { navigate('/') };
+  const handleClose = () => { navigate('/login') };
   const [picNum, setPicNum] = useState(Math.floor(Math.random() * 5));
 
   const pics = [p1, p2, p3, p4, p5, p6];

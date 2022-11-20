@@ -1,9 +1,10 @@
-import React from 'react'
+import React ,{useState}from 'react'
 import { useNavigate } from 'react-router-dom';
 import SubCardGrid from '../../containers/SubCardGrid';
 import { Typography, Box, Button, ButtonGroup, Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import index_banner from '../../img/index/index_banner.jpg';
+import {useSelector} from 'react-redux'
 const useStyle = makeStyles({
   banner: {
     background: `url(${index_banner}) 10%`,
@@ -16,7 +17,8 @@ const useStyle = makeStyles({
 export default function Index() {
   const classes = useStyle();
   const navigate = useNavigate();
-  const loginButtonGroup = () => {
+  const {userObj} = useSelector((state)=>state.userReducer)
+  const LoginButtonGroup = () => {
     return (
       <ButtonGroup size='large' sx={{ outlineWidth: '12px' }}>
         <Button variant="bold" onClick={() => navigate('/login')} sx={{
@@ -27,7 +29,7 @@ export default function Index() {
     )
   }
 
-  const welcomeSign = () => {
+  const WelcomeSign = () => {
     return (
       <Typography sx={{
         paddingTop: '10px',
@@ -35,7 +37,7 @@ export default function Index() {
         fontWeight: 'bold',
         color: 'white'
       }}>
-        Welcome Back,
+        Welcome Back, {userObj.name}!
       </Typography>
     )
   }
@@ -54,6 +56,9 @@ export default function Index() {
           Start Here
         </Typography>
 
+        {
+          userObj.name? <WelcomeSign/>: <LoginButtonGroup/>
+        }
 
 
 

@@ -6,6 +6,8 @@ import SignUp from './pages/SignUp'
 import Layout from './containers/Layout'
 import Course from './pages/Course'
 import Profile from './pages/Profile'
+import Suggest from './pages/Suggest'
+import ShowSuggestion from './pages/ShowSuggestion'
 
 const MainRouter = () => {
     return (
@@ -17,6 +19,8 @@ const MainRouter = () => {
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/course" element={<Course />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/suggest/*" element={<Suggest />} />
+                    <Route path="/show_suggestion" element={<ShowSuggestion />} />
                     <Route path='*' element={<Index />}/>
                 </Routes>
             </Layout>

@@ -12,7 +12,7 @@ export default function SuggestButton() {
                 position: "fixed",
                 top: "80%",
                 left: "80%"
-            }} onClick={() => { navigate("/suggest") }}>
+            }} onClick={() => { navigate("/suggest/newcourse") }}>
                 
                 <EditIcon sx={{ mr: 1 }} />
                 suggestions

@@ -51,7 +51,8 @@ export default function Profile(props) {
       method:"GET",
       url:`${baseURL}/api/user/logout`,
     }).then(res=>{
-      navigate('/index')
+      navigate('/');
+      localStorage.removeItem("userObj")
     })
   }
 
@@ -116,7 +117,7 @@ export default function Profile(props) {
         </Grid>
         <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} type="submit">Submit</Button>
       </form>
-      <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} href="/">Logout</Button>
+      <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} onClick={handleLogout}>Logout</Button>
     </Box>
   )
 }

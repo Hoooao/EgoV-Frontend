@@ -62,6 +62,8 @@ export default function LogIn() {
       }
     }).then(res=>{
       if(res.data.ok){
+       if(localStorage.getItem("userObj")) localStorage.removeItem("userObj");
+       localStorage.setItem("userObj",JSON.stringify(res.data.userObj));
         dispatch(setUser(res.data.userObj));
         navigate("/");
       }else {

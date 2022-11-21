@@ -21,7 +21,9 @@ export default function Index() {
   const [subjects, setsubjects] = useState([]);
   const classes = useStyle();
   const navigate = useNavigate();
-  const {userObj} = useSelector((state)=>state.userReducer)
+  const userObj = JSON.parse(localStorage.getItem("userObj"))?
+  JSON.parse(localStorage.getItem("userObj")):{};
+  
   const LoginButtonGroup = () => {
     return (
       <ButtonGroup size='large' sx={{ outlineWidth: '12px' }}>

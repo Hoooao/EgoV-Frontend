@@ -22,7 +22,9 @@ function ResponsiveAppBar() {
   const navigate = useNavigate()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const { userObj } = useSelector((state) => state.userReducer)
+  const userObj = JSON.parse(localStorage.getItem("userObj"))?
+  JSON.parse(localStorage.getItem("userObj")):{};
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };

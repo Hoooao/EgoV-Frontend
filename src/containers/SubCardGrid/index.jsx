@@ -8,10 +8,10 @@ import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 
 export default function SubCard(props) {
-  const {name, description, image_url} = props;
+  const {name, description, image_url,id} = props;
   return ( 
     <Grid item xs={12} md= {6} lg={4} sx={{
-      paddingTop:'20px'
+      paddingTop:'20px' 
     }}>
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia

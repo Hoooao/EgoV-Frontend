@@ -82,7 +82,7 @@ export default function Index() {
       }}>
         <Grid container spacing={7}>
           {subjects.map(ele=>{
-            return <SubCardGrid {...ele}/>
+            return <SubCardGrid {...ele} key = {ele.id}/>
           })}
         </Grid>
       </Box>

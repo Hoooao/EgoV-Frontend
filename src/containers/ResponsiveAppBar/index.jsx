@@ -35,7 +35,6 @@ function ResponsiveAppBar() {
   };
 
   const handleCloseUserMenu = (event) => {
-    navigate('/profile')
     setAnchorElUser(null);
   };
 
@@ -64,7 +63,7 @@ function ResponsiveAppBar() {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+          <MenuItem key={setting} onClick={()=>{navigate('/profile'); setAnchorElUser(null)}}>
             <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}

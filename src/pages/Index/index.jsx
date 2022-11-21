@@ -1,10 +1,12 @@
-import React ,{useState}from 'react'
+import React ,{useState,useEffect}from 'react'
 import { useNavigate } from 'react-router-dom';
 import SubCardGrid from '../../containers/SubCardGrid';
 import { Typography, Box, Button, ButtonGroup, Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import index_banner from '../../img/index/index_banner.jpg';
 import {useSelector} from 'react-redux'
+import axios from 'axios';
+import apiConfig from '../../apiConfig.mjs';
 const useStyle = makeStyles({
   banner: {
     background: `url(${index_banner}) 10%`,
@@ -15,6 +17,8 @@ const useStyle = makeStyles({
 
 
 export default function Index() {
+  const baseURL = apiConfig.base;
+  const [subjects, setsubjects] = useState([]);
   const classes = useStyle();
   const navigate = useNavigate();
   const {userObj} = useSelector((state)=>state.userReducer)
@@ -41,6 +45,18 @@ export default function Index() {
       </Typography>
     )
   }
+
+  const getAllSubjects = ()=>{
+    axios({
+      method:"GET",
+      url:`${baseURL}/api/subject/getSubjects`
+    }).then(res=>{
+      setsubjects(res.data.subjects);
+    })
+  }
+  useEffect(() => {
+    getAllSubjects();
+  }, [])
   return (
     <div>
       <Box className={classes.banner} sx={{
@@ -59,21 +75,15 @@ export default function Index() {
         {
           userObj.name? <WelcomeSign/>: <LoginButtonGroup/>
         }
-
-
-
-
-
       </Box>
 
       <Box sx={{
         paddingTop: '100px'
       }}>
         <Grid container spacing={7}>
-          <SubCardGrid />
-          <SubCardGrid />
-          <SubCardGrid />
-          <SubCardGrid />
+          {subjects.map(ele=>{
+            return <SubCardGrid {...ele}/>
+          })}
         </Grid>
       </Box>
 

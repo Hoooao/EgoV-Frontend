@@ -7,7 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from '@mui/material';
 
-export default function SubCard() {
+export default function SubCard(props) {
+  const {name, description, image_url} = props;
   return ( 
     <Grid item xs={12} md= {6} lg={4} sx={{
       paddingTop:'20px'
@@ -15,17 +16,16 @@ export default function SubCard() {
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
-          alt="green iguana"
+          alt={name}
           height="140"
-          image="https://mui.com/static/images/cards/contemplative-reptile.jpg"
+          image={image_url}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {description}
           </Typography>
         </CardContent>
         <CardActions>

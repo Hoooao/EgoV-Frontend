@@ -59,7 +59,8 @@ export default function LogIn() {
       data: {
         username_mail: usernameMail,
         password
-      }
+      },
+      withCredentials:true
     }).then(res=>{
       if(res.data.ok){
        if(localStorage.getItem("userObj")) localStorage.removeItem("userObj");

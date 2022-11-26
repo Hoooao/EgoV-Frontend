@@ -8,6 +8,7 @@ import Course from './pages/Course'
 import Profile from './pages/Profile'
 import Suggest from './pages/Suggest'
 import ShowSuggestion from './pages/ShowSuggestion'
+import Subjects from './pages/Subjects'
 import axios from 'axios'
 import apiConfig from './apiConfig.mjs'
 import { useEffect } from 'react'
@@ -22,7 +23,6 @@ const MainRouter = () => {
             if(!res.data.logged){
                 localStorage.removeItem("userObj");
             }
-            console.log(111)
         })
     },[]);
 
@@ -36,6 +36,7 @@ const MainRouter = () => {
                     <Route path="/course" element={<Course />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/suggest/*" element={<Suggest />} />
+                    <Route path="/subjects" element={<Subjects />} />
                     <Route path="/show_suggestion" element={<ShowSuggestion />} />
                     <Route path='*' element={<Index />} />
                 </Routes>

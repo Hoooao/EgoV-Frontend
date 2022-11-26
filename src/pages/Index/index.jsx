@@ -4,7 +4,6 @@ import SubCardGrid from '../../containers/SubCardGrid';
 import { Typography, Box, Button, ButtonGroup, Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import index_banner from '../../img/index/index_banner.jpg';
-import {useSelector} from 'react-redux'
 import axios from 'axios';
 import apiConfig from '../../apiConfig.mjs';
 const useStyle = makeStyles({
@@ -48,16 +47,16 @@ export default function Index() {
     )
   }
 
-  const getAllSubjects = ()=>{
+  const getSixSubjects = ()=>{
     axios({
       method:"GET",
-      url:`${baseURL}/api/subject/getSubjects`
+      url:`${baseURL}/api/subject/getSubjects/6`
     }).then(res=>{
       setsubjects(res.data.subjects);
     })
   }
   useEffect(() => {
-    getAllSubjects();
+    getSixSubjects();
   }, [])
   return (
     <div>
@@ -82,6 +81,15 @@ export default function Index() {
       <Box sx={{
         paddingTop: '100px'
       }}>
+        <Typography sx={{
+        paddingTop: '10px',
+        fontSize: { xs: '15px', md: '25px', lg: '32px' },
+        fontWeight: 'bold',
+        color: 'black',
+        float:'left'
+      }}>
+          Guess You Like...
+        </Typography>
         <Grid container spacing={7}>
           {subjects.map(ele=>{
             return <SubCardGrid {...ele} key = {ele.id}/>

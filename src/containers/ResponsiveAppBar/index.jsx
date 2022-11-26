@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useSelector } from 'react-redux'
+import apiConfig from '../../apiConfig.mjs';
 
 const pages = ['Subjects', 'My Favorites', 'My Posts'];
 const settings = ['My Profile'];
@@ -35,6 +36,12 @@ function ResponsiveAppBar() {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  const handleClickPages=(target)=>{
+    if(target=="Subjects")navigate(`subjects`)
+    else if(target=="My Favorites")navigate(`favorites`)
+    else if(target=="My Posts")navigate(`myposts`)
+  }
 
   const handleCloseUserMenu = (event) => {
     setAnchorElUser(null);
@@ -131,7 +138,9 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={()=>{
+                  handleClickPages(page);
+                }}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -160,7 +169,9 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={()=>{
+                  handleClickPages(page);
+                }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

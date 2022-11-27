@@ -1,9 +1,17 @@
 import React from 'react'
-import { Box, Card, Button, Typography, Rating, Paper, ButtonGroup, Grid,ButtonBase } from '@mui/material'
+import { Box, Card, Button, Typography, Rating, Paper, ButtonGroup, Grid, Container } from '@mui/material'
 import ClassCardButtonGrid from '../../containers/ClassCardButtonGrid';
 export default function Course() {
+    const courseInfoBold = {
+        fontWeight: 'bold',
+        marginBottom: '10px',
+        float: 'left',
+        clear: 'left'
+    }
+    const courseInfoThin = { float: 'left', marginLeft: '7px' };
     return (
-        <div>
+        <Container maxWidth='lg'>
+            <div>
             <Box sx={{
                 marginTop: '20px',
                 display: 'flex',
@@ -24,24 +32,46 @@ export default function Course() {
                     }}>
                         <Typography variant='h6' align='left' sx={{
                             fontWeight: 'bold',
-                            marginBottom: '26px',
+                            marginBottom: '7px',
                         }}>
-                            MIT 6.S081: Operating System Engineering
+                            Course Title
                         </Typography>
+                        <hr />
+                        <Box sx={{ marginTop: '10px' }}>
+                            <Typography align='left' sx={courseInfoBold}>
+                                Instructor(s):
+                            </Typography >
+                            <Typography sx={courseInfoThin}>Instructor</Typography>
 
-                        <Typography align='left' sx={{
+                            <Typography align='left' sx={courseInfoBold}>
+                                Offered By:
+                            </Typography >
+                            <Typography sx={courseInfoThin}>Uni</Typography>
 
-                            fontWeight: 'bold',
-                            marginBottom: '26px',
+                            <Typography align='left' sx={courseInfoBold}>
+                                Difficulty:
+                            </Typography >
+                            <Rating name="read-only" value={4.5} readOnly precision={0.5} sx={{
+                                float: 'left'
+                            }} />
 
-                        }}>
-                            Difficulty: <Rating name="read-only" value={4.5} readOnly precision={0.5} />
-                        </Typography >
-                        <Typography align='left' sx={{
-                            height: '30px'
-                        }}>
-                            Introduction: 6.S081 is AUS subject intended for undergraduates, and it provides an introduction to operating systems. Separately, 6.828 will be offered in future terms as a graduate-level seminar-style class focused on research in operating systems.
-                        </Typography>
+                            <Typography align='left' sx={courseInfoBold}>
+                                Prerequisites:
+                            </Typography >
+                            <Typography sx={courseInfoThin}>Prerequisites</Typography>
+
+                            <Typography align='left' sx={courseInfoBold}>
+                                Languages:
+                            </Typography >
+                            <Typography sx={courseInfoThin}>Languages</Typography>
+
+                            <Typography align='left' sx={courseInfoBold}>
+                                Course Hour:
+                            </Typography >
+                            <Typography sx={courseInfoThin}>Course Hour</Typography>
+
+                        </Box>
+
                         <Button variant='outlined' size='large' sx={{
                             position: 'absolute',
                             bottom: '0px',
@@ -51,9 +81,19 @@ export default function Course() {
                         </Button>
                     </Box>
                 </Box>
-
+            </Box>
+            <Box sx={{ marginTop:'20px' }}>
+                <Typography sx={{ fontWeight: 'bold', float: 'left', clear: 'both', fontSize:'20px' }}>Introduction:</Typography>
+                <Typography align='left' sx={{
+                    maxHeight: { lg: '120px', sm: '100px',xs:'50px' },
+                    overflow: 'scroll',
+                    clear: 'both'
+                }}>
+                    6.S081 is AUS subject intended for undergraduates, and it provides an introduction to operating systems. Separately, 6.828 will be offered in future terms as a graduate-level seminar-style class focused on research in operating systems.
+                    </Typography>
             </Box>
 
+            
             <Box sx={{
                 marginTop: '30px'
             }}>
@@ -69,7 +109,7 @@ export default function Course() {
                     <ButtonGroup variant='outlined' size='large'
                         sx={{
                             width: '100%',
-                            position:'relative',
+                            position: 'relative',
                         }}>
                         <Button >YouTube</Button>
                         <Button>Bilibili</Button>
@@ -78,17 +118,18 @@ export default function Course() {
                     <Grid container sx={{
                         marginTop: '20px',
                         width: '100%',
-                        diaplay:'flex'
+                        diaplay: 'flex'
                     }}>
-                        <ClassCardButtonGrid/>
+                        <ClassCardButtonGrid />
 
-                        <ClassCardButtonGrid/>
+                        <ClassCardButtonGrid />
 
-                        <ClassCardButtonGrid/>
-                        
+                        <ClassCardButtonGrid />
+
                     </Grid>
                 </Paper>
             </Box>
         </div>
+        </Container>
     )
 }

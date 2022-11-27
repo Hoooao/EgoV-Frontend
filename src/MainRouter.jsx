@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import Suggest from './pages/Suggest'
 import ShowSuggestion from './pages/ShowSuggestion'
 import Subjects from './pages/Subjects'
+import Test from './pages/Test'
 import axios from 'axios'
 import apiConfig from './apiConfig.mjs'
 import { useEffect } from 'react'
@@ -33,11 +34,14 @@ const MainRouter = () => {
                     <Route path="/" element={<Index />} />
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/course" element={<Course />} />
+                    <Route path="/course" element={<Course />} >
+                        <Route path=':id'></Route>
+                    </Route>
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/suggest/*" element={<Suggest />} />
                     <Route path="/subjects/*" element={<Subjects />} />
                     <Route path="/show_suggestion" element={<ShowSuggestion />} />
+                    <Route path="/test" element={<Test />} />
                     <Route path='*' element={<Index />} />
                 </Routes>
             </Layout>

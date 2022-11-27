@@ -50,7 +50,7 @@ export default function Index() {
   const getThreeSubjects = ()=>{
     axios({
       method:"GET",
-      url:`${baseURL}/api/subject/getSubjects?`,
+      url:`${baseURL}/api/subject/getSubjects`,
       params:{
         num:'3'
       }

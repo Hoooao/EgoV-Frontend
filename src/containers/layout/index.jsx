@@ -20,12 +20,11 @@ export default function Layout({ children }) {
     return (
         <div>
             <ResponsiveAppBar />
-            <Container className={classes.container} maxWidth='lg'>
-                <Box className={classes.content}>
-                    {children}
-                </Box>
-                <SuggestButton/>
-            </Container>
+
+            <Box className={classes.content}>
+                {children}
+            </Box>
+            <SuggestButton />
         </div>
     )
 }

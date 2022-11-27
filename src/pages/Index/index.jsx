@@ -1,7 +1,7 @@
 import React ,{useState,useEffect}from 'react'
 import { useNavigate } from 'react-router-dom';
 import SubCardGrid from '../../containers/SubCardGrid';
-import { Typography, Box, Button, ButtonGroup, Grid } from '@mui/material'
+import { Typography, Box, Button, ButtonGroup, Grid, Container } from '@mui/material'
 import { makeStyles } from '@mui/styles';
 import index_banner from '../../img/index/index_banner.jpg';
 import axios from 'axios';
@@ -47,21 +47,24 @@ export default function Index() {
     )
   }
 
-  const getSixSubjects = ()=>{
+  const getThreeSubjects = ()=>{
     axios({
       method:"GET",
-      url:`${baseURL}/api/subject/getSubjects/6`
+      url:`${baseURL}/api/subject/getSubjects?`,
+      params:{
+        num:'3'
+      }
     }).then(res=>{
       setsubjects(res.data.subjects);
     })
   }
   useEffect(() => {
-    getSixSubjects();
+    getThreeSubjects();
   }, [])
   return (
     <div>
       <Box className={classes.banner} sx={{
-        height: { xs: 350, md: 400, lg: 500 },
+        height: { xs: 350, md: 400, lg: 600 },
       }}>
 
         <Typography sx={{
@@ -77,9 +80,10 @@ export default function Index() {
           userObj.name? <WelcomeSign/>: <LoginButtonGroup/>
         }
       </Box>
-
+      <Container className={classes.container} maxWidth='lg'>
       <Box sx={{
-        paddingTop: '100px'
+        paddingTop: '100px',
+        marginBottom:'200px'
       }}>
         <Typography sx={{
         paddingTop: '10px',
@@ -96,6 +100,7 @@ export default function Index() {
           })}
         </Grid>
       </Box>
+      </Container>
 
     </div>
   )

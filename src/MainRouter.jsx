@@ -36,7 +36,7 @@ const MainRouter = () => {
                     <Route path="/course" element={<Course />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/suggest/*" element={<Suggest />} />
-                    <Route path="/subjects" element={<Subjects />} />
+                    <Route path="/subjects/*" element={<Subjects />} />
                     <Route path="/show_suggestion" element={<ShowSuggestion />} />
                     <Route path='*' element={<Index />} />
                 </Routes>

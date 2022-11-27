@@ -10,8 +10,8 @@ export default function SuggestButton() {
         <Box>
             <Fab variant="extended" sx={{
                 position: "fixed",
-                top: "80%",
-                left: "80%"
+                top: "90%",
+                left: {lg:'80%',sm:"70%"}
             }} onClick={() => { navigate("/suggest/newcourse") }}>
                 
                 <EditIcon sx={{ mr: 1 }} />

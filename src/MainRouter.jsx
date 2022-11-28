@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import Suggest from './pages/Suggest'
 import ShowSuggestion from './pages/ShowSuggestion'
 import Subjects from './pages/Subjects'
+import Courses from './pages/Courses'
 import Test from './pages/Test'
 import axios from 'axios'
 import apiConfig from './apiConfig.mjs'
@@ -20,12 +21,12 @@ const MainRouter = () => {
         axios({
             method: "GET",
             url: `${baseURL}/api/user/checkLoginState`
-        }).then(res=>{
-            if(!res.data.logged){
+        }).then(res => {
+            if (!res.data.logged) {
                 localStorage.removeItem("userObj");
             }
         })
-    },[]);
+    }, []);
 
     return (
         <div>
@@ -39,7 +40,9 @@ const MainRouter = () => {
                     </Route>
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/suggest/*" element={<Suggest />} />
-                    <Route path="/subjects/*" element={<Subjects />} />
+                    <Route path="/subjects" element={<Subjects />} >
+                        <Route path='/subjects/:id' element={<Courses/>}></Route>
+                    </Route>
                     <Route path="/show_suggestion" element={<ShowSuggestion />} />
                     <Route path="/test" element={<Test />} />
                     <Route path='*' element={<Index />} />

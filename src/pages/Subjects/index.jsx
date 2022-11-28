@@ -44,11 +44,11 @@ export default function Subjects() {
                 <Card height="140">
                     <Box sx={{
                         marginTop: '20px',
-                        display: 'flex',
+                        display: 'flex'
                     }}>
                         <Card sx={{
                             width: '70%',
-                            height: '300px',
+                            height: '400px',
                             backgroundImage: 'url("https://i.ytimg.com/vi/Z56Jmr9Z34Q/sddefault.jpg")'
                         }} />
                         <Box sx={{
@@ -61,19 +61,23 @@ export default function Subjects() {
                                 width: '100%',
                                 height: '250px',
                             }}>
-                                <Typography variant='h6' align='left' sx={{
-                                    fontWeight: 'bold',
-                                    marginBottom: '7px',
-                                    fontSize: { lg: '25px', md: '15px', sm: '15px', xs: '10px' }
-                                }}>
-                                    {title}
-                                </Typography>
+
+                                <Button variant='text' size='large' sx={{
+                                }} onClick={() => { navigate(`/course/${id}`) }}>
+                                    <Typography variant='h6' align='left' sx={{
+                                        fontWeight: 'bold',
+                                        marginBottom: '0px',
+                                        fontSize: { lg: '20px', md: '10px', sm: '10px', xs: '5px' }
+                                    }}>
+                                        {title}
+                                    </Typography>
+                                </Button>
                                 <hr />
                                 <Box sx={{ marginTop: '10px' }}>
                                     <Typography align='left' sx={courseInfoBold}>
                                         Instructor(s):
                                     </Typography >
-                                    <Typography sx={courseInfoThin}>{`${instructor_1} ${instructor_2 === '' ? '' : `, ${instructor_2}`} ${instructor_3 === '' ? '' : `, ${instructor_3}`}`}</Typography>
+                                    <Typography sx={courseInfoThin}>{`${instructor_1=== '' ? 'Unknown' : `${instructor_1}`} ${instructor_2 === '' ? '' : `, ${instructor_2}`} ${instructor_3 === '' ? '' : `, ${instructor_3}`}`}</Typography>
 
                                     <Typography align='left' sx={courseInfoBold}>
                                         Offered By:
@@ -103,26 +107,20 @@ export default function Subjects() {
                                     <Typography sx={courseInfoThin}>{time}</Typography>
 
                                 </Box>
-
-                                <Button variant='outlined' size='large' sx={{
-                                    position: 'absolute',
-                                    bottom: '0px',
-                                    left: '20px'
-                                }} onClick={() => { navigate(`/course/${id}`) }}>
-                                    Start
-                                </Button>
                             </Box>
+                            <Card sx={{ marginTop: '20px', clear: 'both', marginLeft: '20px', height:'100%', marginBottom:'10px',
+                                        padding:'5px' }}>
+                                <Typography align='left' sx={{
+                                    maxHeight: { lg: '120px', sm: '100px', xs: '50px' },
+                                    overflow: 'scroll',
+                                    clear: 'both',
+                                    fontSize: { lg: '15px', sm: '10px', xs: '5px' }
+                                }}>
+                                    {description}
+                                </Typography>
+                            </Card>
                         </Box>
-                    </Box>
-                    <Box sx={{ marginTop: '20px' }}>
-                        <Typography align='left' sx={{
-                            maxHeight: { lg: '120px', sm: '100px', xs: '50px' },
-                            overflow: 'scroll',
-                            clear: 'both',
-                            fontSize: { lg: '30px', sm: '20px', xs: '5px' }
-                        }}>
-                            {description}
-                        </Typography>
+
                     </Box>
                 </Card>
             )

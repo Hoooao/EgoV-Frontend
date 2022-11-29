@@ -85,7 +85,7 @@ export default function Courses() {
       url: `${baseURL}/api/course/getCoursesWithSubject`,
       params: { subject_num: id }
     }).then(res => {
-      if (res.data.ok) setCourses(res.data.courses);
+      setCourses(res.data.courses);
       // error handler
     });
 
@@ -95,6 +95,7 @@ export default function Courses() {
       params: { id }
     }).then(res => {
       if (res.data.ok) setSubject(res.data.subject);
+      else console.log(res.data.message)
       // error handler
     })
   }, [])
@@ -106,15 +107,20 @@ export default function Courses() {
         <Card height="140">
           <Box sx={{
             marginTop: '20px',
-            display: 'flex'
+            display: 'flex',
+            flexDirection: { sm: 'row', xs: 'column' }
           }}>
             <Card sx={{
               width: '70%',
               height: '400px',
-              backgroundImage: ``,
+              backgroundImage: `url(${subject.image_url})`,
               backgroundRepeat: 'no-repeat',
               backgroundPosition: 'center center',
-              backgroundColor: 'black'
+              backgroundColor: 'black',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              marginBottom: '20px'
+
             }} />
             <Box sx={{
               position: 'relative',
@@ -124,28 +130,29 @@ export default function Courses() {
                 marginLeft: '20px',
                 display: 'flex wrap column',
                 width: '100%',
-                height: '250px',
+                height: '250px'
               }}>
 
-                <Typography variant='h6' align='left' sx={{
-                  fontWeight: 'bold',
-                  marginBottom: '0px',
-                  fontSize: { lg: '20px', md: '10px', sm: '10px', xs: '5px' }
-                }}>
-                  {subject.title}
-                </Typography>
+                <Box>
+                  <Typography variant='h6' align='left' sx={{
+                    fontWeight: 'bold',
+                    marginBottom: '0px',
+                    fontSize: { lg: '20px', md: '15px'}
+                  }}>
+                    {subject.name}
+                  </Typography>
 
-                <hr />
+                  <hr />
+                </Box>
               </Box>
               <Box sx={{
-                marginTop: '20px', clear: 'both', marginLeft: '20px', height: '100%', marginBottom: '10px',
-                padding: '5px'
+                marginLeft: '20px', height: '100%', marginBottom: '10px',
+                padding: '5px', position: 'absolute', top: '50px'
               }}>
                 <Typography align='left' sx={{
-                  maxHeight: { lg: '120px', sm: '100px', xs: '50px' },
+                  maxHeight: '55%',
                   overflow: 'scroll',
-                  clear: 'both',
-                  fontSize: { lg: '15px', sm: '10px', xs: '5px' }
+                  fontSize: { lg: '20px', sm: '15px', xs: '10px' }
                 }}>
                   {subject.description}
                 </Typography>

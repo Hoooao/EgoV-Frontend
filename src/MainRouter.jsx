@@ -40,8 +40,9 @@ const MainRouter = () => {
                     </Route>
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/suggest/*" element={<Suggest />} />
-                    <Route path="/subjects" element={<Subjects />} >
-                        <Route path='/subjects/:id' element={<Courses/>}></Route>
+                    <Route path="/subjects" >
+                        <Route path=':id' element={<Courses/>}></Route>
+                        <Route path='' element={<Subjects/>}></Route>
                     </Route>
                     <Route path="/show_suggestion" element={<ShowSuggestion />} />
                     <Route path="/test" element={<Test />} />

@@ -38,8 +38,8 @@ export default function Subjects() {
         }
 
         const CarouselCard = (props) => {
-            const { id, title, instructor_1, instructor_2, instructor_3, description, uni, time, preqs, difficulties, language } = props;
-
+            const { id, title, instructor_1, instructor_2, instructor_3, 
+                description, uni, time, preqs, difficulties, language, img_url } = props;
             return (
                 <Card height="140">
                     <Box sx={{
@@ -49,7 +49,11 @@ export default function Subjects() {
                         <Card sx={{
                             width: '70%',
                             height: '400px',
-                            backgroundImage: 'url("https://i.ytimg.com/vi/Z56Jmr9Z34Q/sddefault.jpg")'
+                            backgroundImage: `url(${img_url})`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center center',
+                            backgroundColor: 'black',
+                            backgroundSize:'contain'
                         }} />
                         <Box sx={{
                             position: 'relative',
@@ -77,7 +81,7 @@ export default function Subjects() {
                                     <Typography align='left' sx={courseInfoBold}>
                                         Instructor(s):
                                     </Typography >
-                                    <Typography sx={courseInfoThin}>{`${instructor_1=== '' ? 'Unknown' : `${instructor_1}`} ${instructor_2 === '' ? '' : `, ${instructor_2}`} ${instructor_3 === '' ? '' : `, ${instructor_3}`}`}</Typography>
+                                    <Typography sx={courseInfoThin}>{`${instructor_1 === '' ? 'Unknown' : `${instructor_1}`} ${instructor_2 === '' ? '' : `, ${instructor_2}`} ${instructor_3 === '' ? '' : `, ${instructor_3}`}`}</Typography>
 
                                     <Typography align='left' sx={courseInfoBold}>
                                         Offered By:
@@ -108,17 +112,19 @@ export default function Subjects() {
 
                                 </Box>
                             </Box>
-                            <Card sx={{ marginTop: '20px', clear: 'both', marginLeft: '20px', height:'100%', marginBottom:'10px',
-                                        padding:'5px' }}>
+                            <Box sx={{
+                                marginTop: '20px', clear: 'both', marginLeft: '20px', height: '100%', marginBottom: '10px',
+                                padding: '5px'
+                            }}>
                                 <Typography align='left' sx={{
                                     maxHeight: { lg: '120px', sm: '100px', xs: '50px' },
                                     overflow: 'scroll',
                                     clear: 'both',
-                                    fontSize: { lg: '15px', sm: '10px', xs: '5px' }
+                                    fontSize: { lg: '20px', sm: '15px', xs: '10px' }
                                 }}>
                                     {description}
                                 </Typography>
-                            </Card>
+                            </Box>
                         </Box>
 
                     </Box>

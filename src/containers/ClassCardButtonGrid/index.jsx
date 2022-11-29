@@ -4,15 +4,17 @@ import { Card, ButtonBase, Grid, Typography } from '@mui/material'
 export default function ClassCardButtonGrid() {
     return (
         <Grid item xs={12} sx={{
-            width: '100%',
             marginTop: '10px',
-            float:'left'
+            float:'left',
+            background:'blue'
         }}>
-            <ButtonBase>
+            <ButtonBase sx={{float:'left', width:'100%'}}>
                 <Card sx={{
-                    height: '70px',
+                    height: '100px',
+                    width:'90%',
+                    float:'left'
                 }}>
-                    <Typography variant='h6'>
+                    <Typography variant='h6' sx={{float:'left', marginLeft:'10px', marginTop:'5px'}}>
                         Lecture 3 OS Organization and System Calls
                     </Typography>
                 </Card>

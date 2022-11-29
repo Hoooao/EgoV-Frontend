@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Card, Button, Typography, Rating, Paper, ButtonGroup, Grid, Container } from '@mui/material'
+import { Box, Card, Button, Typography, Rating, Paper, ButtonGroup, Grid, Container, Divider } from '@mui/material'
 import ClassCardButtonGrid from '../../containers/ClassCardButtonGrid';
 export default function Course() {
     const courseInfoBold = {
@@ -15,20 +15,25 @@ export default function Course() {
             <Box sx={{
                 marginTop: '20px',
                 display: 'flex',
+                flexDirection:{sm:'row', xs:'column'}
             }}>
                 <Card sx={{
                     width: '290px',
                     height: '310px',
+                    marginLeft:'auto',
+                    marginRight:'auto'
                 }} />
                 <Box sx={{
                     position: 'relative',
-                    width: '100%'
+                    width: '100%',
+                    background:'green',
                 }}>
                     <Box sx={{
                         marginLeft: '20px',
                         display: 'flex wrap column',
                         width: '100%',
                         height: '250px',
+                        overflow:'hidden'
                     }}>
                         <Typography variant='h6' align='left' sx={{
                             fontWeight: 'bold',
@@ -36,7 +41,8 @@ export default function Course() {
                         }}>
                             Course Title
                         </Typography>
-                        <hr />
+                        
+                        <Divider sx={{width:'90%'}}/>
                         <Box sx={{ marginTop: '10px' }}>
                             <Typography align='left' sx={courseInfoBold}>
                                 Instructor(s):
@@ -71,16 +77,9 @@ export default function Course() {
                             <Typography sx={courseInfoThin}>Course Hour</Typography>
 
                         </Box>
-
-                        <Button variant='outlined' size='large' sx={{
-                            position: 'absolute',
-                            bottom: '0px',
-                            left: '20px'
-                        }}>
-                            Start
-                        </Button>
                     </Box>
                 </Box>
+                
             </Box>
             <Box sx={{ marginTop:'20px' }}>
                 <Typography sx={{ fontWeight: 'bold', float: 'left', clear: 'both', fontSize:'20px' }}>Introduction:</Typography>
@@ -118,7 +117,8 @@ export default function Course() {
                     <Grid container sx={{
                         marginTop: '20px',
                         width: '100%',
-                        diaplay: 'flex'
+                        float:'left',
+                        background:'red'
                     }}>
                         <ClassCardButtonGrid />
 

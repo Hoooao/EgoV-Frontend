@@ -10,11 +10,12 @@ export default function ClassCardButtonGrid() {
         }}>
             <ButtonBase sx={{float:'left', width:'100%'}}>
                 <Card sx={{
-                    height: '100px',
-                    width:'90%',
-                    float:'left'
+                    height: '80px',
+                    width:'95%',
+                    float:'left',
+                    
                 }}>
-                    <Typography variant='h6' sx={{float:'left', marginLeft:'10px', marginTop:'5px'}}>
+                    <Typography variant='h6' sx={{float:'left', marginLeft:'10px', marginTop:'5px', fontSize:'20px'}}>
                         Lecture 3 OS Organization and System Calls
                     </Typography>
                 </Card>

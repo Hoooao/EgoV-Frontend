@@ -35,8 +35,8 @@ const MainRouter = () => {
                     <Route path="/" element={<Index />} />
                     <Route path="/login" element={<LogIn />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/course" element={<Course />} >
-                        <Route path=':id'></Route>
+                    <Route path="/course/*" element={<Course />} >
+                        <Route path=':id/*'></Route>
                     </Route>
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/suggest/*" element={<Suggest />} />

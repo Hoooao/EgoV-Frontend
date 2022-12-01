@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Routes, Route } from 'react-router-dom';
+import { useParams, Routes, Route, useNavigate } from 'react-router-dom';
 import { Box, Card, Button, Typography, Rating, Paper, ButtonGroup, Grid, Container, Divider } from '@mui/material'
 import axios from 'axios';
 import ClassCardButtonGrid from '../../containers/ClassCardButtonGrid';
@@ -7,19 +7,34 @@ import apiConfig from '../../apiConfig.mjs';
 
 
 export default function Course() {
-    const { id } = useParams();
+    let { id } = useParams();
     const [course, setCourse] = useState({});
+    //const [YTBLectures, setYTBLectures] = useState([])
+    //const [lectures, setLectures] = useState([])
+    const navigate = useNavigate()
     const baseURL = apiConfig.base;
     useEffect(() => {
+        if (isNaN(id)) {
+            navigate('/');
+            return;
+        }
         axios({
             method: 'GET',
             url: `${baseURL}/api/course/getCoursesWithID`,
             params: { id }
         }).then(res => {
-            if (res.data.ok) setCourse(res.data.course);
-            else console.log(res.data.message)
+            if (res.data.ok) {
+                localStorage.setItem("course", JSON.stringify(res.data.course));
+                setCourse(res.data.course);
+            }
+            else console.log(res.data.message);
         })
     }, [])
+
+    useEffect(() => {
+        localStorage.setItem("course", JSON.stringify(course));
+    }, [course])
+
     const courseInfoBold = {
         fontWeight: 'bold',
         marginBottom: '10px',
@@ -27,6 +42,7 @@ export default function Course() {
         clear: 'left'
     }
     const VideoCourseList = () => {
+        const lectures = JSON.parse(localStorage.getItem('course')).info.items;
         return (
             <Box sx={{
                 float: 'left',
@@ -38,7 +54,6 @@ export default function Course() {
                 <Paper sx={{
                     width: '100%',
                     height: '100%',
-                    backgroundColor: 'rgba(1,1,1,0.5)',
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative',
@@ -57,16 +72,14 @@ export default function Course() {
                         marginTop: '20px',
                         width: '100%',
                         float: 'left',
-                        background: 'red',
                         overflow: 'scroll',
                     }}>
-                        <ClassCardButtonGrid />
-
-                        <ClassCardButtonGrid />
-
-                        <ClassCardButtonGrid />
-                        <ClassCardButtonGrid />
-                        <ClassCardButtonGrid />
+                        {lectures.map((ele, index) => {
+                            return (
+                                <ClassCardButtonGrid {...ele.snippet} key={index}
+                                    {...{ course_id: course.id, lec_num: index + 1 }} />
+                            )
+                        })}
                     </Grid>
                 </Paper>
             </Box>
@@ -75,6 +88,7 @@ export default function Course() {
     }
 
     const BannerCourseList = () => {
+        const lectures = JSON.parse(localStorage.getItem('course')).info.items;
         return (
             <Box sx={{
                 marginTop: '30px'
@@ -82,7 +96,6 @@ export default function Course() {
                 <Paper sx={{
                     width: '100%',
                     height: '600px',
-                    backgroundColor: 'rgba(1,1,1,0.5)',
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative',
@@ -101,21 +114,16 @@ export default function Course() {
                         marginTop: '20px',
                         width: '100%',
                         float: 'left',
-                        background: 'red',
-                        overflow:'scroll'
+                        overflow: 'scroll'
                     }}>
-                        <ClassCardButtonGrid />
+                        {
+                            lectures.map((ele, index) => {
 
-                        <ClassCardButtonGrid />
-
-                        <ClassCardButtonGrid />
-                        <ClassCardButtonGrid />
-
-                        <ClassCardButtonGrid />
-
-                        <ClassCardButtonGrid />
-                        <ClassCardButtonGrid />
-                        <ClassCardButtonGrid />
+                                return (
+                                    <ClassCardButtonGrid {...ele.snippet} key={index}
+                                        {...{ course_id: course.id, lec_num: index + 1 }} />
+                                )
+                            })}
 
                     </Grid>
                 </Paper>
@@ -124,7 +132,9 @@ export default function Course() {
 
     }
 
-    const Banner = () => {
+    const Banner = (props) => {
+        const { id, title, instructor_1, instructor_2, instructor_3,
+            description, uni, time, preqs, difficulties, language, img_url } = JSON.parse(localStorage.getItem('course'));
         return (
             <Box>
                 <Box sx={{
@@ -136,7 +146,11 @@ export default function Course() {
                         width: '290px',
                         height: '310px',
                         marginLeft: 'auto',
-                        marginRight: 'auto'
+                        marginRight: 'auto',
+                        backgroundImage: `url(${img_url})`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center center',
+                        backgroundSize: 'contain'
                     }} />
                     <Box sx={{
                         position: 'relative',
@@ -154,7 +168,7 @@ export default function Course() {
                                 fontWeight: 'bold',
                                 marginBottom: '7px',
                             }}>
-                                Course Title
+                                {title}
                             </Typography>
 
                             <Divider sx={{ width: '90%' }} />
@@ -162,34 +176,34 @@ export default function Course() {
                                 <Typography align='left' sx={courseInfoBold}>
                                     Instructor(s):
                                 </Typography >
-                                <Typography sx={courseInfoThin}>Instructor</Typography>
+                                <Typography sx={courseInfoThin}>{`${instructor_1 === '' ? 'Unknown' : `${instructor_1}`} ${instructor_2 === '' ? '' : `, ${instructor_2}`} ${instructor_3 === '' ? '' : `, ${instructor_3}`}`}</Typography>
 
                                 <Typography align='left' sx={courseInfoBold}>
                                     Offered By:
                                 </Typography >
-                                <Typography sx={courseInfoThin}>Uni</Typography>
+                                <Typography sx={courseInfoThin}>{uni}</Typography>
 
                                 <Typography align='left' sx={courseInfoBold}>
                                     Difficulty:
                                 </Typography >
-                                <Rating name="read-only" value={4.5} readOnly precision={0.5} sx={{
+                                <Rating name="read-only" value={difficulties} readOnly precision={0.5} sx={{
                                     float: 'left'
                                 }} />
 
                                 <Typography align='left' sx={courseInfoBold}>
                                     Prerequisites:
                                 </Typography >
-                                <Typography sx={courseInfoThin}>Prerequisites</Typography>
+                                <Typography sx={courseInfoThin}>{preqs}</Typography>
 
                                 <Typography align='left' sx={courseInfoBold}>
                                     Languages:
                                 </Typography >
-                                <Typography sx={courseInfoThin}>Languages</Typography>
+                                <Typography sx={courseInfoThin}>{language}</Typography>
 
                                 <Typography align='left' sx={courseInfoBold}>
                                     Course Hour:
                                 </Typography >
-                                <Typography sx={courseInfoThin}>Course Hour</Typography>
+                                <Typography sx={courseInfoThin}>{time}</Typography>
 
                             </Box>
                         </Box>
@@ -203,15 +217,20 @@ export default function Course() {
                         overflow: 'scroll',
                         clear: 'both'
                     }}>
-                        6.S081 is AUS subject intended for undergraduates, and it provides an introduction to operating systems. Separately, 6.828 will be offered in future terms as a graduate-level seminar-style class focused on research in operating systems.
+                        {description}
                     </Typography>
                 </Box>
-                <BannerCourseList />
+                <BannerCourseList {...props} />
             </Box>
         )
     }
 
     const Video = () => {
+        const lectures = JSON.parse(localStorage.getItem('course')).info.items;
+        const { id } = useParams();
+        if (id > lectures.length) navigate('/')
+        console.log(id)
+        const videoId = lectures[id - 1].snippet.resourceId.videoId;
         return (
             <div>
                 <Box sx={{ backgroundColor: 'black', width: '100%' }}>
@@ -222,11 +241,8 @@ export default function Course() {
                         height: '450px',
 
                     }}>
-                        <iframe src="//player.bilibili.com/player.html?aid=375588815&bvid=BV1so4y1m7U5&cid=339262048&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="450px" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
-
-
+                        <iframe width="100%" height="450px" src={`https://www.youtube.com/embed/${videoId}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture allowfullscreen" allowFullScreen="allowfullscreen"></iframe>
                     </Box>
-
                     <VideoCourseList />
                 </Box>
             </div>
@@ -240,8 +256,8 @@ export default function Course() {
             <div>
 
                 <Routes>
-                    <Route path='/lecture' element={<Video />} />
-                    <Route path='/banner' element={<Banner />} />
+                    <Route path=':id/' element={<Banner />} />
+                    <Route path={`${course.id}/lecture/:id`} element={<Video />} />
                 </Routes>
 
 

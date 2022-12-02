@@ -1,10 +1,10 @@
-import React from 'react'
-import { useState } from 'react'
-import { Box, TextField, Typography, Grid, Button } from '@mui/material'
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Box, TextField, Typography, Grid, Button, Container } from '@mui/material'
 import axios from 'axios';
 import apiConfig from '../../apiConfig.mjs';
-import { Navigate, useNavigate } from 'react-router-dom';
+import UserLeftBar from '../../containers/UserLeftBar';
+
 
 export default function Profile(props) {
   const [name, setname] = useState('');
@@ -12,112 +12,122 @@ export default function Profile(props) {
   const [avatar, setavatar] = useState('');
   const [id, setid] = useState('');
   const [description, setdescription] = useState('');
+  const [userObj, setUserObj] = useState({})
   const baseURL = apiConfig.base;
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     axios({
       method: "GET",
       url: `${baseURL}/api/user/profile`
     }).then(res => {
-      const userObj = res.data.userObj;
-      setavatar(userObj.avatar);
-      setdescription(userObj.description);
-      setemail(userObj.email);
-      setname(userObj.name);
-      setid(userObj.id)
+      const user = res.data.userObj || JSON.parse(localStorage.getItem('userObj'));
+      setUserObj(user)
+      if (userObj.id) {
+        setavatar(userObj.avatar);
+        setdescription(userObj.description);
+        setemail(userObj.email);
+        setname(userObj.name);
+        setid(userObj.id)
+      }
+      else {
+        navigate('/');
+      }
     })
   }, [])
 
-  const handleChangeInfo=(e)=>{
+  const handleChangeInfo = (e) => {
     e.preventDefault();
     axios({
-      method:"POST",
-      url:`${baseURL}/api/user/update_profile`,
-      data:{
+      method: "POST",
+      url: `${baseURL}/api/user/update_profile`,
+      data: {
         name,
         description,
         avatar,
         email,
         id
       }
-    }).then(res=>{
+    }).then(res => {
       navigate("/profile")
     })
   }
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     axios({
-      method:"GET",
-      url:`${baseURL}/api/user/logout`,
-    }).then(res=>{
+      method: "GET",
+      url: `${baseURL}/api/user/logout`,
+    }).then(res => {
       navigate('/');
       localStorage.removeItem("userObj")
     })
   }
 
   return (
-    <Box>
-      <Typography>
-        You Can Change Your Profile Here
-      </Typography>
+    <Container fixed maxWidth='lg'>
+      <Box>
+        <UserLeftBar {...userObj}/>
+        <Typography>
+          You Can Change Your Profile Here
+        </Typography>
 
-      <form action="" onSubmit={handleChangeInfo}>
-        <Grid container spacing={3}>
+        <form action="" onSubmit={handleChangeInfo}>
+          <Grid container spacing={3}>
 
-          <Grid item xs={12}>
-            <TextField
-              id="filled-multiline-flexible"
-              label="Username"
-              multiline
-              maxRows={4}
-              value={name}
-              variant="filled"
-              onChange={(e) => { setname(e.target.value) }}
-            />
+            <Grid item xs={12}>
+              <TextField
+                id="filled-multiline-flexible"
+                label="Username"
+                multiline
+                maxRows={4}
+                value={name}
+                variant="filled"
+                onChange={(e) => { setname(e.target.value) }}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                id="filled-multiline-flexible"
+                label="E-mail"
+                multiline
+                maxRows={4}
+                value={email}
+                variant="filled"
+                onChange={(e) => { setemail(e.target.value) }}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                id="filled-multiline-flexible"
+                label="Avatar"
+                multiline
+                maxRows={4}
+                value={"Please put the url here"}
+                variant="filled"
+                onChange={(e) => { setavatar(e.target.value) }}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Description"
+                multiline
+                rows={4}
+                value={description}
+                sx={{
+                  width: "30%"
+                }}
+                onChange={(e) => { setdescription(e.target.value) }}
+              />
+            </Grid>
           </Grid>
-
-          <Grid item xs={12}>
-            <TextField
-              id="filled-multiline-flexible"
-              label="E-mail"
-              multiline
-              maxRows={4}
-              value={email}
-              variant="filled"
-              onChange={(e) => { setemail(e.target.value) }}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField
-              id="filled-multiline-flexible"
-              label="Avatar"
-              multiline
-              maxRows={4}
-              value={"Please put the url here"}
-              variant="filled"
-              onChange={(e) => { setavatar(e.target.value) }}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <TextField
-              id="outlined-multiline-static"
-              label="Description"
-              multiline
-              rows={4}
-              value={description}
-              sx={{
-                width: "30%"
-              }}
-              onChange={(e) => { setdescription(e.target.value) }}
-            />
-          </Grid>
-        </Grid>
-        <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} type="submit">Submit</Button>
-      </form>
-      <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} onClick={handleLogout}>Logout</Button>
-    </Box>
+          <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} type="submit">Submit</Button>
+        </form>
+        <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} onClick={handleLogout}>Logout</Button>
+      </Box>
+    </Container>
   )
 }

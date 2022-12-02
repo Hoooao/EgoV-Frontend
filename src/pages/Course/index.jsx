@@ -150,12 +150,12 @@ export default function Course() {
                         backgroundImage: `url(${img_url})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center center',
-                        backgroundSize: 'contain'
+                        backgroundSize: 'contain',
+                        backgroundColor:'black'
                     }} />
                     <Box sx={{
                         position: 'relative',
                         width: '100%',
-                        background: 'green',
                     }}>
                         <Box sx={{
                             marginLeft: '20px',

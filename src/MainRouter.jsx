@@ -11,6 +11,7 @@ import ShowSuggestion from './pages/ShowSuggestion'
 import Subjects from './pages/Subjects'
 import Courses from './pages/Courses'
 import Test from './pages/Test'
+import Posts from './pages/Posts'
 import axios from 'axios'
 import apiConfig from './apiConfig.mjs'
 import { useEffect } from 'react'
@@ -23,7 +24,8 @@ const MainRouter = () => {
             url: `${baseURL}/api/user/checkLoginState`
         }).then(res => {
             if (!res.data.logged) {
-                localStorage.removeItem("userObj");
+                // doced for testing
+                //localStorage.removeItem("userObj");
             }
         })
     }, []);
@@ -41,11 +43,12 @@ const MainRouter = () => {
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/suggest/*" element={<Suggest />} />
                     <Route path="/subjects" >
-                        <Route path=':id' element={<Courses/>}></Route>
-                        <Route path='' element={<Subjects/>}></Route>
+                        <Route path=':id' element={<Courses />}></Route>
+                        <Route path='' element={<Subjects />}></Route>
                     </Route>
                     <Route path="/show_suggestion" element={<ShowSuggestion />} />
                     <Route path="/test" element={<Test />} />
+                    <Route path="/myposts" element={<Posts />} />
                     <Route path='*' element={<Index />} />
                 </Routes>
             </Layout>

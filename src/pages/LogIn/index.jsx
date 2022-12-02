@@ -65,8 +65,9 @@ export default function LogIn() {
       if(res.data.ok){
        if(localStorage.getItem("userObj")) localStorage.removeItem("userObj");
        localStorage.setItem("userObj",JSON.stringify(res.data.userObj));
+       console.log(localStorage.getItem('userObj'));
         dispatch(setUser(res.data.userObj));
-        navigate("/");
+        navigate("/test");
       }else {
         console.log(res.data.message)
       }

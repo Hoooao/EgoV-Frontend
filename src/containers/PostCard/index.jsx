@@ -16,30 +16,29 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 const Post = (props) => {
-  const { title, description, date } = props;
+  const { title, description, date, img_url } = props;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={title}
+        subheader={(new Date(date*1)).toDateString()}
       />
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="https://mui.com/static/images/cards/paella.jpg"
+          image={img_url}
           alt="green iguana"
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+            {description}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Share
+          Read
         </Button>
       </CardActions>
     </Card>

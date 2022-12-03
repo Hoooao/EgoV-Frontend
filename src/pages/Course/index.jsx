@@ -11,6 +11,7 @@ export default function Course() {
     const [course, setCourse] = useState({});
     //const [YTBLectures, setYTBLectures] = useState([])
     //const [lectures, setLectures] = useState([])
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate()
     const baseURL = apiConfig.base;
     useEffect(() => {
@@ -26,6 +27,7 @@ export default function Course() {
             if (res.data.ok) {
                 localStorage.setItem("course", JSON.stringify(res.data.course));
                 setCourse(res.data.course);
+                setLoading(false);
             }
             else console.log(res.data.message);
         })
@@ -133,8 +135,8 @@ export default function Course() {
     }
 
     const Banner = (props) => {
-        const { id, title, instructor_1, instructor_2, instructor_3,
-            description, uni, time, preqs, difficulties, language, img_url } = JSON.parse(localStorage.getItem('course'));
+        const {title, instructor_1, instructor_2, instructor_3,
+            description, uni, time, preqs, difficulties, language, img_url } = course;
         return (
             <Box>
                 <Box sx={{
@@ -151,7 +153,7 @@ export default function Course() {
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center center',
                         backgroundSize: 'contain',
-                        backgroundColor:'black'
+                        backgroundColor: 'black'
                     }} />
                     <Box sx={{
                         position: 'relative',
@@ -248,9 +250,11 @@ export default function Course() {
             </div>
         )
     }
-
-
     const courseInfoThin = { float: 'left', marginLeft: '7px' };
+
+    if(loading){
+        return (<div>Loading...</div>);
+    }
     return (
         <Container maxWidth='lg'>
             <div>

@@ -1,7 +1,9 @@
 
 
 const apiConfig = {
-    base:"http://127.0.0.1:3001"
+    base:"http://localhost:3001"
 }
+
+//http://linserv1.cims.nyu.edu:37461
 
 export default apiConfig;

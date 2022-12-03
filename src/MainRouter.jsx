@@ -48,7 +48,7 @@ const MainRouter = () => {
                     </Route>
                     <Route path="/show_suggestion" element={<ShowSuggestion />} />
                     <Route path="/test" element={<Test />} />
-                    <Route path="/myposts" element={<Posts />} />
+                    <Route path="/myposts/*" element={<Posts />} />
                     <Route path='*' element={<Index />} />
                 </Routes>
             </Layout>

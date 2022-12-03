@@ -71,6 +71,8 @@ function CourseCard(props) {
 export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [subject, setSubject] = useState({});
+  const [loadingCourses, setLoadingCourses] = useState(true);
+  const [loadingSubject, setLoadingSubject] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
   const baseURL = apiConfig.base;
@@ -86,6 +88,7 @@ export default function Courses() {
       params: { subject_num: id }
     }).then(res => {
       setCourses(res.data.courses);
+      setLoadingCourses(false);
       // error handler
     });
 
@@ -94,7 +97,10 @@ export default function Courses() {
       url: `${baseURL}/api/subject/getSubjectWithID`,
       params: { id }
     }).then(res => {
-      if (res.data.ok) setSubject(res.data.subject);
+      if (res.data.ok) {
+        setSubject(res.data.subject);
+        setLoadingSubject(false);
+      }
       else console.log(res.data.message)
       // error handler
     })
@@ -162,6 +168,12 @@ export default function Courses() {
           </Box>
         </Card>
       </Container>
+    )
+  }
+
+  if(loadingCourses || loadingSubject){
+    return (
+      <div>Loading...</div>
     )
   }
   return (

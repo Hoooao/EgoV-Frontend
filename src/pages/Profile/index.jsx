@@ -23,12 +23,12 @@ export default function Profile(props) {
     }).then(res => {
       const user = res.data.userObj || JSON.parse(localStorage.getItem('userObj'));
       setUserObj(user)
-      if (userObj.id) {
-        setavatar(userObj.avatar);
-        setdescription(userObj.description);
-        setemail(userObj.email);
-        setname(userObj.name);
-        setid(userObj.id)
+      if (user.id) {
+        setavatar(user.avatar);
+        setdescription(user.description);
+        setemail(user.email);
+        setname(user.name);
+        setid(user.id)
       }
       else {
         navigate('/');
@@ -66,67 +66,84 @@ export default function Profile(props) {
   return (
     <Container fixed maxWidth='lg'>
       <Box>
-        <UserLeftBar {...userObj}/>
-        <Typography>
-          You Can Change Your Profile Here
-        </Typography>
+        <Box sx={{
+          float: 'left',
+          width: { lg: '15%', sm: '50%' },
+          left: '13%',
+          height: '400px',
+          marginLeft: 'auto',
+          marginRight: 'auto'
+        }}>
+          <UserLeftBar {...userObj} />
+        </Box>
 
-        <form action="" onSubmit={handleChangeInfo}>
-          <Grid container spacing={3}>
 
-            <Grid item xs={12}>
-              <TextField
-                id="filled-multiline-flexible"
-                label="Username"
-                multiline
-                maxRows={4}
-                value={name}
-                variant="filled"
-                onChange={(e) => { setname(e.target.value) }}
-              />
+        <Box sx={{
+          float: 'left',
+          marginTop: '30px'
+        }}>
+          <Typography sx={{
+            marginBottom:'20px'
+          }}>
+            You Can Change Your Profile Here
+          </Typography>
+          <form action="" onSubmit={handleChangeInfo}>
+            <Grid container spacing={3}>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Username"
+                  multiline
+                  maxRows={4}
+                  value={name}
+                  variant="filled"
+                  onChange={(e) => { setname(e.target.value) }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="E-mail"
+                  multiline
+                  maxRows={4}
+                  value={email}
+                  variant="filled"
+                  onChange={(e) => { setemail(e.target.value) }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="filled-multiline-flexible"
+                  label="Avatar"
+                  multiline
+                  maxRows={4}
+                  value={"Please put the url here"}
+                  variant="filled"
+                  onChange={(e) => { setavatar(e.target.value) }}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Description"
+                  multiline
+                  rows={4}
+                  value={description}
+                  sx={{
+                    width: "30%"
+                  }}
+                  onChange={(e) => { setdescription(e.target.value) }}
+                />
+              </Grid>
             </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                id="filled-multiline-flexible"
-                label="E-mail"
-                multiline
-                maxRows={4}
-                value={email}
-                variant="filled"
-                onChange={(e) => { setemail(e.target.value) }}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                id="filled-multiline-flexible"
-                label="Avatar"
-                multiline
-                maxRows={4}
-                value={"Please put the url here"}
-                variant="filled"
-                onChange={(e) => { setavatar(e.target.value) }}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextField
-                id="outlined-multiline-static"
-                label="Description"
-                multiline
-                rows={4}
-                value={description}
-                sx={{
-                  width: "30%"
-                }}
-                onChange={(e) => { setdescription(e.target.value) }}
-              />
-            </Grid>
-          </Grid>
-          <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} type="submit">Submit</Button>
-        </form>
-        <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} onClick={handleLogout}>Logout</Button>
+            <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} type="submit">Submit</Button>
+          </form>
+          <Button variant="outlined" size="large" sx={{ marginTop: "30px" }} onClick={handleLogout}>Logout</Button>
+        </Box>
       </Box>
     </Container>
   )

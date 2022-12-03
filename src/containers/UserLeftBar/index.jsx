@@ -8,14 +8,13 @@ export default function UserLeftBar(props) {
         <Paper sx={{
             width: '150%',
             height: '200%',
-            background: 'red'
         }}>
             <Box sx={{
                 width: '85%',
                 height: '0',
                 paddingBottom: '50%',
                 paddingTop: '25%',
-                background: 'blue',
+                background: 'black',
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 backgroundImage: `url(${userObj.avatar})`,
@@ -23,9 +22,7 @@ export default function UserLeftBar(props) {
                 backgroundPosition: 'center center',
                 backgroundSize: 'contain'
             }}>
-
             </Box>
-
             <Box>
                 <hr />
                 <Typography>

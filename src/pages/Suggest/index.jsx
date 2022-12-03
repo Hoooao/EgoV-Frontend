@@ -116,7 +116,6 @@ export default function Suggest() {
                     marginTop: "20px",
                     float: "left"
                 }}>
-
                     <Box sx={{
                     }}>
                         <FormLabel >

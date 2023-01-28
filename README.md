@@ -1,70 +1,171 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Ego Varsity
 
-In the project directory, you can run:
+## Overview
 
-### `npm start`
+Computer Science is a one of the most selected major across the world and one of the most prominant field for career and academy research. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The resource for one to learn any aspect of CS is without doubt more than abundant, but two problems come with the abundancy itslef: where to start and what to choose.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Ego Varsity is aiming to offer a clear learning path with solid material from well-known Universities around the world for people who are overwhelmed as a beginner.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Data Model
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The application will store **Users**, **Comments**, **Courses**, **Videos**, **Forum Sections**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<figure>
+<div style="text-align:center">
+<img src="documentation/ERM.png" alt="" style="width:100%; background: rgba(255, 255, 255, .5)">
+<figcaption><b>E-R Model of Ego Varsity</b></figcaption>
+</div>
+</figure>
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+An Example USER:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+{
+  uid: "6120974",
+  pswd: // a password hash,
+  id: "Hoooao",
+  level: 100
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+An Example VIDEO:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```javascript
+{
+  tile: "CS144: Computer Networking 01"
+  length: 122241,
+  url: ,// url to Youtube
+  views: 12,
+  comments: [
+    //undecided comment objs with user,date,content and so on...
+  ]
 
-## Learn More
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+An Example DISCUSSION:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+{
+  tile: "title of the post?"
+  topic: "Computer Networking",
+  views: 12,
+  content: "Wat is TCP",
+  course: //ref to a COURSE.Course_name,
+  video: //ref to a VIDEO.Title
+  comments: [
+    //undecided comment objs with user,date,content and so on...
+  ]
 
-### Code Splitting
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+An Example COURSE:
 
-### Analyzing the Bundle Size
+```javascript
+{
+  course_name: "CS144: Computer Networking",
+  introduction: "This is a course"
+  difficulty: 1
+  instructor: "Keith Winstein"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+An Example TOPIC:
 
-### Making a Progressive Web App
+```javascript
+{
+  topic_name: "Computer Networking"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Since I use SQL, there is currently no MongoDB schemas
 
-### `npm run build` fails to minify
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Wireframes
+
+
+/main - main page
+
+![list create](documentation/main.png)
+
+/login - page for logging in
+
+![list](documentation/login.png)
+
+/signup - page for signning up
+
+![list](documentation/sign-up.png)
+
+/topic/somecourse - page for some course
+
+![list](documentation/course.png)
+
+/topic/somecourse/video - page for some video
+
+![list](documentation/video.png)
+
+/topic/forum - page for forum of some topic
+
+![list](documentation/forum.png)
+
+## Site map
+
+<figure>
+<div style="text-align:center">
+<img src="documentation/site-map.png" alt="" style="width:70%; background: white">
+<figcaption><b>Site Map</b></figcaption>
+</div>
+</figure>
+
+## User Stories or Use Cases
+
+1. as non-registered user, I can register a new account with the site
+2. as a user, I can use the recommandations or the side-bar to choose a topic I like, like Computer Networking
+3. as a user I can watch public courses for a topic, like CS144 at Stanford in the Computer Networking topic
+4. as a user I read others' posts, notes in the topic's forum section
+5. as a user I can post questions, notes in a forum for a specific topic
+6. as a user I can commant on a specific video for a course
+7. as a user I can petite for new videos to be uploaded
+
+## Research Topics
+
+(__TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed)
+
+* (5 points) React
+    * I'm going to implement this site as an SPA
+    * Learn routing in React
+    * It's a challenging library to learn, so I've assigned it 5 points
+* (4 points) Material UI
+    * I will use customized Material UI for the UI design
+* (5 points) Relational database system
+    * I will use relational database instead of MongoDB as my DBMS
+    * I will use Enahnced Entity Relational Diagram and Relational Model as guidance for the DB design
+    * 
+
+14 points total out of 8 required points
+
+
+## [Link to Initial Main Project File](server/server.mjs) 
+
+
+## Annotations / References Used
+
+(__TODO__: list any tutorials/references/etc. that you've based your code off of)
+
+1. [Material UI](https://mui.com/zh/) 
+2. [React](https://reactjs.org/docs/getting-started.html) 
+
